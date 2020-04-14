@@ -24,16 +24,19 @@ down_payment = selling_price * deposit_percentage/100
 asked_from_bank = selling_price - down_payment
 security_gates = 7000
 renovations = 2000  # Bathroom mirrors + soap dish
+number_of_months_without_tenant = 4
+occupation_interest = selling_price * (10/100) * number_of_months_without_tenant  # Before securing a tenant
+electricity_water_meter_setup = 1500
 
 
 # Analysis
 monthly_repayments = asked_from_bank * (monthly_effective_interest_rate * math.pow(1 + monthly_effective_interest_rate, number_of_repayments)) / (math.pow(1 + monthly_effective_interest_rate, number_of_repayments) - 1)
 
-monthly_cashflow = rental_income - monthly_repayments - levies - insurance - property_management - incase_money
+monthly_cashflow_before_tax = rental_income - monthly_repayments - levies - insurance - property_management - incase_money
 
-total_investment = down_payment + security_gates + renovations
+total_investment = down_payment + security_gates + renovations + occupation_interest + electricity_water_meter_setup
 
-annual_cashflow = monthly_cashflow * 12
+annual_cashflow = monthly_cashflow_before_tax * 12
 
 return_on_investment = annual_cashflow / total_investment  # annual interest
 
